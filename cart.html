@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Web Store - Cart</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+	<h1>Shopping Cart</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody id="cart-items">
+		</tbody>
+	</table>
+	<p><a href="products.html">Continue Shopping</a></p>
+	
+	<script type="text/javascript">
+		var cart = JSON.parse(localStorage.getItem("cart")) || [];
+		var cartItems = document.getElementById("cart-items");
+		for (var i = 0; i < cart.length; i++) {
+			var itemRow = document.createElement("tr");
+			var itemName = document.createElement("td");
+			var itemPrice = document.createElement("td");
+			var removeButton = document.createElement("button");
+			itemName.textContent = cart[i].name;
+			itemPrice.textContent = "$" + cart[i].price.toFixed(2);
+			removeButton.textContent = "Remove";
+			removeButton.onclick = function(index) {
+				return function() {
+					removeFromCart(index);
+					itemRow.parentNode.removeChild(itemRow);
+				};
+			}(i);
+			itemRow.appendChild(itemName);
+			itemRow.appendChild(itemPrice);
+			itemRow.appendChild(removeButton);
+			cartItems.appendChild(itemRow);
+		}
+		function removeFromCart(index) {
+			cart.splice(index, 1);
+			localStorage.setItem("cart", JSON.stringify(cart));
+		}
+	</script>
+</body>
+</html>

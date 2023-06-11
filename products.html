@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Web Store</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+	<h1>Available Products</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Product A</td>
+				<td>$10.00</td>
+				<td><button onclick="addToCart('Product A', 10)">Add to Cart</button></td>
+			</tr>
+			<tr>
+				<td>Product B</td>
+				<td>$20.00</td>
+				<td><button onclick="addToCart('Product B', 20)">Add to Cart</button></td>
+			</tr>
+			<tr>
+				<td>Product C</td>
+				<td>$30.00</td>
+				<td><button onclick="addToCart('Product C', 30)">Add to Cart</button></td>
+			</tr>
+			<tr>
+				<td>Product D</td>
+				<td>$15.00</td>
+				<td><button onclick="addToCart('Product D', 15)">Add to Cart</button></td>
+			</tr>
+			<tr>
+				<td>Product E</td>
+				<td>$25.00</td>
+				<td><button onclick="addToCart('Product E', 25)">Add to Cart</button></td>
+			</tr>
+			<tr>
+				<td>Product F</td>
+				<td>$35.00</td>
+				<td><button onclick="addToCart('Product F', 35)">Add to Cart</button></td>
+			</tr>
+		</tbody>
+	</table>
+    <p><a href="index.html">HOME</a></p>
+	<p><a href="cart.html">View Cart</a></p>
+	
+	<script type="text/javascript">
+		var cart = JSON.parse(localStorage.getItem("cart")) || [];
+		function addToCart(name, price) {
+			var item = {
+				name: name,
+				price: price
+			};
+			cart.push(item);
+			alert(name + " added to cart!");
+			localStorage.setItem("cart", JSON.stringify(cart));
+		}
+	</script>
+</body>
+</html>
